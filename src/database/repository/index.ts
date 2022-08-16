@@ -1,0 +1,1 @@
+export {IngredientRepository} from './Ingredient.repository'

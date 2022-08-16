@@ -1,0 +1,1 @@
+export {IngredientResolver} from './Ingredient.resolver'
