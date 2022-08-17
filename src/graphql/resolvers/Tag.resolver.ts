@@ -20,7 +20,7 @@ export class TagResolver {
 
     @Mutation(() => Tag,
         {
-            description: "Create an tag"
+            description: "Create a tag"
         })
     async createTag(
         @Arg("tag",
@@ -35,7 +35,7 @@ export class TagResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update an tag"
+            description: "Update a tag"
         })
     async updateTag(
         @Arg("id",
@@ -56,7 +56,7 @@ export class TagResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "delete an tag"
+            description: "Delete a tag"
         })
     async deleteTag(
         @Arg("id",

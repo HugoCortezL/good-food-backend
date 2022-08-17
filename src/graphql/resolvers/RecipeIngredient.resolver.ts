@@ -9,21 +9,6 @@ export class RecipeIngredientResolver {
         this.repository = new RecipeIngredientRepository()
     }
 
-    /*@Query(() => [RecipeIngredient],
-        {
-            description: "Get recipeIngredient by id"
-        })
-    async getRecipeIngredientByIds(
-        @Arg("ids",
-            {
-                description: "The id of the RecipeIngredient"
-            })
-        ids: String[]
-    ): Promise<RecipeIngredient[]> {
-        const recipeIngredient = await this.repository.getByIds(ids)
-        return recipeIngredient
-    }*/
-
     @Mutation(() => RecipeIngredient,
         {
             description: "Create an RecipeIngredient"
@@ -41,7 +26,7 @@ export class RecipeIngredientResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update an recipeIngredient"
+            description: "Update an recipeIngredient"
         })
     async updateRecipeIngredient(
         @Arg("id",
@@ -62,7 +47,7 @@ export class RecipeIngredientResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "delete an recipeIngredient"
+            description: "Delete an recipeIngredient"
         })
     async deleteRecipeIngredient(
         @Arg("id",

@@ -20,7 +20,7 @@ export class PortionResolver {
 
     @Mutation(() => Portion,
         {
-            description: "Create an portion"
+            description: "Create a portion"
         })
     async createPortion(
         @Arg("portion",
@@ -35,7 +35,7 @@ export class PortionResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "Update an portion"
+            description: "Update a portion"
         })
     async updatePortion(
         @Arg("id",
@@ -56,7 +56,7 @@ export class PortionResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "Delete an portion"
+            description: "Delete a portion"
         })
     async deletePortion(
         @Arg("id",

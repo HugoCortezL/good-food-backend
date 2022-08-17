@@ -55,7 +55,7 @@ export class RecipeResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update a recipe"
+            description: "Update a recipe"
         })
     async updateRecipe(
         @Arg("id",
@@ -76,7 +76,7 @@ export class RecipeResolver {
     
     @Mutation(() => Boolean,
         {
-            description: "favorite a recipe"
+            description: "Favorite a recipe"
         })
     async favoriteRecipe(
         @Arg("id",
@@ -91,7 +91,7 @@ export class RecipeResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "delete an recipe"
+            description: "Delete a recipe"
         })
     async deleteRecipe(
         @Arg("id",

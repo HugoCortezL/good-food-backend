@@ -17,9 +17,4 @@ export class StepRepository {
         const success = await stepModel.deleteOne({ _id: id })
         return success.acknowledged
     }
-
-    async deleteMany(ids: String[]): Promise<Boolean> {
-        const success = await stepModel.deleteMany({ _id: { $in: ids } })
-        return success.acknowledged
-    }
 }

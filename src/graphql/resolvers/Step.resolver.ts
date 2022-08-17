@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver, Query } from 'type-graphql'
+import { Arg, Mutation, Resolver } from 'type-graphql'
 import { Step, StepInput } from '../types'
 import { StepRepository } from '../../database/repository'
 
@@ -9,20 +9,9 @@ export class StepResolver {
         this.repository = new StepRepository()
     }
 
-    @Query(() => [Step],
-        {
-            description: "Get all step"
-        })
-    async query(): Promise<Step[]> {
-        /*const step = await this.repository.getAll()
-        return step*/
-        const steps: Step[] = []
-        return steps
-    }
-
     @Mutation(() => Step,
         {
-            description: "Create an step"
+            description: "Create a step"
         })
     async createStep(
         @Arg("step",
@@ -37,7 +26,7 @@ export class StepResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update an step"
+            description: "Update a step"
         })
     async updateStep(
         @Arg("id",
@@ -58,7 +47,7 @@ export class StepResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "delete an step"
+            description: "Delete a step"
         })
     async deleteStep(
         @Arg("id",
