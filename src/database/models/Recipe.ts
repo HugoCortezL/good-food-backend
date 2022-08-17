@@ -37,7 +37,12 @@ const recipeSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Step"
         }
-    ]
+    ],
+    favorite: {
+        type: Boolean,
+        default: false,
+        required: true,
+    }
 
 })
 

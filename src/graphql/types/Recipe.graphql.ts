@@ -49,6 +49,12 @@ export class Recipe {
             description: "The difficulty of the recipe"
         })
     steps!: Step[]
+    
+    @Field(() => Boolean,
+        {
+            description: "The difficulty of the recipe"
+        })
+    favorite!: boolean
 }
 
 @InputType()
@@ -94,4 +100,10 @@ export class RecipeInput {
             description: "The difficulty of the recipe"
         })
     steps!: String[]
+    
+    @Field(() => Boolean,
+        {
+            description: "The difficulty of the recipe"
+        })
+    favorite!: boolean
 }
