@@ -32,6 +32,12 @@ const recipeSchema = new mongoose.Schema({
         min: 1,
         max: 3
     },
+    steps: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Step"
+        }
+    ]
 
 })
 
