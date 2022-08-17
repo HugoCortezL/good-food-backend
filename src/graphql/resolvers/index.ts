@@ -1,1 +1,2 @@
-export {IngredientResolver} from './Ingredient.resolver'
+export { IngredientResolver } from './Ingredient.resolver'
+export { RecipeResolver } from './Recipe.resolver'

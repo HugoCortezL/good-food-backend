@@ -5,7 +5,7 @@ import { IngredientRepository } from '../../database/repository'
 @Resolver(() => Ingredient)
 export class IngredientResolver {
     repository: IngredientRepository
-    constructor() { 
+    constructor() {
         this.repository = new IngredientRepository()
     }
 
@@ -13,7 +13,7 @@ export class IngredientResolver {
         {
             description: "Get all ingredients"
         })
-    async getAllIngredients() {
+    async getAllIngredients(): Promise<Ingredient[]> {
         const ingredients = await this.repository.getAll()
         return ingredients
     }
@@ -28,7 +28,7 @@ export class IngredientResolver {
                 description: "The object of the ingredient"
             })
         ingredientInput: IngredientInput
-    ) {
+    ): Promise<Ingredient> {
         const ingredient = await this.repository.create(ingredientInput)
         return ingredient
     }
@@ -43,17 +43,17 @@ export class IngredientResolver {
                 description: "The id of the ingredient"
             })
         id: String,
-        
+
         @Arg("ingredient",
             {
                 description: "The object of the ingredient"
             })
         ingredientInput: IngredientInput
-    ) {
+    ): Promise<Boolean> {
         const success = await this.repository.update(id, ingredientInput)
         return success
     }
-    
+
     @Mutation(() => Boolean,
         {
             description: "delete an ingredient"
@@ -64,10 +64,8 @@ export class IngredientResolver {
                 description: "The id of the ingredient"
             })
         id: String
-    ) {
+    ): Promise<Boolean> {
         const success = await this.repository.delete(id)
         return success
     }
-
-    
 }
