@@ -9,8 +9,8 @@ export class PortionRepository {
     }
 
     async create(item: PortionInput): Promise<Portion> {
-        const portions = await portionModel.create(item)
-        return (portions as unknown as Portion)
+        const portion = await portionModel.create(item)
+        return (portion as unknown as Portion)
     }
 
     async update(id: String, item: PortionInput): Promise<Boolean> {

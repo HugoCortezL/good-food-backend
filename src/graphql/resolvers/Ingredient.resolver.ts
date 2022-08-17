@@ -35,7 +35,7 @@ export class IngredientResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update an ingredient"
+            description: "Update an ingredient"
         })
     async updateIngredient(
         @Arg("id",
@@ -56,7 +56,7 @@ export class IngredientResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "delete an ingredient"
+            description: "Delete an ingredient"
         })
     async deleteIngredient(
         @Arg("id",

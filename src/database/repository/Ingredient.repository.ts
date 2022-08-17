@@ -9,8 +9,8 @@ export class IngredientRepository {
     }
 
     async create(item: IngredientInput): Promise<Ingredient> {
-        const ingredients = await ingredientModel.create(item)
-        return (ingredients as unknown as Ingredient)
+        const ingredient = await ingredientModel.create(item)
+        return (ingredient as unknown as Ingredient)
     }
 
     async update(id: String, item: IngredientInput): Promise<Boolean> {
