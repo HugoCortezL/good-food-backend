@@ -1,5 +1,5 @@
 import { ObjectType, InputType, Field, ID } from "type-graphql";
-import { Step, Tag } from './index'
+import { Step, Tag, RecipeIngredient } from './index'
 @ObjectType()
 export class Recipe {
     @Field(() => ID,
@@ -67,6 +67,12 @@ export class Recipe {
             description: "The general tags of the recipe"
         })
     generalTags!: Tag[]
+    
+    @Field(() => [RecipeIngredient],
+        {
+            description: "The RecipeIngredients of the recipe"
+        })
+    ingredients!: RecipeIngredient[]
 }
 
 @InputType()
@@ -130,4 +136,10 @@ export class RecipeInput {
             description: "The general tags of the recipe"
         })
     generalTags!: String[]
+
+    @Field(() => [String],
+        {
+            description: "The Strings of the recipe"
+        })
+    ingredients!: String[]
 }

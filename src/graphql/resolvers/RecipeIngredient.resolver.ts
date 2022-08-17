@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver, Query } from 'type-graphql'
+import { Arg, Mutation, Resolver } from 'type-graphql'
 import { RecipeIngredient, RecipeIngredientInput } from '../types'
 import { RecipeIngredientRepository } from '../../database/repository'
 
@@ -9,14 +9,20 @@ export class RecipeIngredientResolver {
         this.repository = new RecipeIngredientRepository()
     }
 
-    @Query(() => [RecipeIngredient],
+    /*@Query(() => [RecipeIngredient],
         {
-            description: "Get all recipeIngredient"
+            description: "Get recipeIngredient by id"
         })
-    async query(): Promise<RecipeIngredient[]> {
-        const recipeIngredients: RecipeIngredient[] = []
-        return recipeIngredients
-    }
+    async getRecipeIngredientByIds(
+        @Arg("ids",
+            {
+                description: "The id of the RecipeIngredient"
+            })
+        ids: String[]
+    ): Promise<RecipeIngredient[]> {
+        const recipeIngredient = await this.repository.getByIds(ids)
+        return recipeIngredient
+    }*/
 
     @Mutation(() => RecipeIngredient,
         {

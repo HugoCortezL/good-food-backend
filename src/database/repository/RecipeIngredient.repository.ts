@@ -3,6 +3,11 @@ import { RecipeIngredient, RecipeIngredientInput } from '../../graphql/types'
 
 export class RecipeIngredientRepository {
 
+    async getByIds(ids: RecipeIngredient[]): Promise<RecipeIngredient[]> {
+        const recipeIngredient = await recipeIngredientModel.find({_id : {$in : ids}}).populate("portion").populate("ingredient")
+        return (recipeIngredient as unknown as RecipeIngredient[])
+    }
+
     async create(item: RecipeIngredientInput): Promise<RecipeIngredient> {
         const recipeIngredients = await recipeIngredientModel.create(item)
         return (recipeIngredients as unknown as RecipeIngredient)

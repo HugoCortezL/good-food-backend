@@ -52,7 +52,14 @@ const recipeSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tag"
         }
+    ],
+    ingredients: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "RecipeIngredient"
+        }
     ]
+
 
 })
 
