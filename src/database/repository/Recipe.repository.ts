@@ -33,6 +33,16 @@ export class RecipeRepository {
         return success.acknowledged
     }
 
+    async favorite(id: String): Promise<Boolean> {
+        const recipeToEdit = await this.getById(id)
+        const newRecipe = await recipeModel.updateOne({ _id: id}, {
+            $set: {
+                favorite: !recipeToEdit.favorite
+            }
+        })
+        return newRecipe.acknowledged
+    }
+
     async delete(id: String): Promise<Boolean> {
         const success = await recipeModel.deleteOne({ _id: id })
         return success.acknowledged

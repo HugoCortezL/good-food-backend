@@ -50,7 +50,7 @@ export class RecipeResolver {
 
     @Mutation(() => Boolean,
         {
-            description: "update an recipe"
+            description: "update a recipe"
         })
     async updateRecipe(
         @Arg("id",
@@ -67,6 +67,21 @@ export class RecipeResolver {
     ): Promise<Boolean> {
         const success = await this.repository.update(id, recipeInput)
         return success
+    }
+    
+    @Mutation(() => Boolean,
+        {
+            description: "favorite a recipe"
+        })
+    async favoriteRecipe(
+        @Arg("id",
+            {
+                description: "The id of the recipe"
+            })
+        id: String
+    ): Promise<Boolean> {
+        const recipe = await this.repository.favorite(id)
+        return recipe
     }
 
     @Mutation(() => Boolean,
