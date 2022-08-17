@@ -1,25 +1,25 @@
 import { ObjectType, InputType, Field, ID } from "type-graphql";
 
 @ObjectType()
-export class Step {
+export class Portion {
     @Field(() => ID,
         {
-            description: "The id of the step"
+            description: "The id of the portion"
         })
     id!: String
 
     @Field(() => String,
         {
-            description: "The name of the step"
+            description: "The name of the portion"
         })
-    description!: string
+    name!: string
 }
 
 @InputType()
-export class StepInput {
+export class PortionInput {
     @Field(() => String,
         {
-            description: "The name of the step"
+            description: "The name of the portion"
         })
-    description!: string
+    name!: string
 }
