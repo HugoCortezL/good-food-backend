@@ -4,12 +4,12 @@ import { Recipe, RecipeInput } from '../../graphql/types'
 export class RecipeRepository {
 
     async getAll(): Promise<Recipe[]> {
-        const recipes = await recipeModel.find().populate("steps")
+        const recipes = await recipeModel.find().populate("steps").populate("principalTag").populate("generalTags")
         return (recipes as unknown as Recipe[])
     }
 
     async getById(id: String): Promise<Recipe> {
-        const recipe = await recipeModel.findOne({ _id: id }).populate("steps")
+        const recipe = await recipeModel.findOne({ _id: id }).populate("steps").populate("principalTag").populate("generalTags")
         return (recipe as unknown as Recipe)
     }
 
@@ -27,7 +27,9 @@ export class RecipeRepository {
                 imageUrl: item.imageUrl,
                 rate: item.rate,
                 difficulty: item.difficulty,
-                steps: item.steps
+                steps: item.steps,
+                principalTag: item.principalTag,
+                generalTags: item.generalTags,
             }
         })
         return success.acknowledged
@@ -35,7 +37,7 @@ export class RecipeRepository {
 
     async favorite(id: String): Promise<Boolean> {
         const recipeToEdit = await this.getById(id)
-        const newRecipe = await recipeModel.updateOne({ _id: id}, {
+        const newRecipe = await recipeModel.updateOne({ _id: id }, {
             $set: {
                 favorite: !recipeToEdit.favorite
             }

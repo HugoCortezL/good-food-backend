@@ -32,17 +32,27 @@ const recipeSchema = new mongoose.Schema({
         min: 1,
         max: 3
     },
+    favorite: {
+        type: Boolean,
+        default: false,
+        required: true,
+    },
     steps: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Step"
         }
     ],
-    favorite: {
-        type: Boolean,
-        default: false,
-        required: true,
-    }
+    principalTag: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag"
+    },
+    generalTags: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Tag"
+        }
+    ]
 
 })
 
