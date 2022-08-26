@@ -43,7 +43,7 @@ For this project to work, you will need some tools:
 $ git clone https://github.com/HugoCortezL/good-food-backend.git
  
 # Go to folder
-$ cd atualPortifolio
+$ cd good-food-backend
  
 # Install the dependencies
 $ npm install
