@@ -13,6 +13,12 @@ export class Step {
             description: "The name of the step"
         })
     description!: string
+
+    @Field(() => ID,
+        {
+            description: "The recipe id of the Step"
+        })
+    recipeId!: string
 }
 
 @InputType()
@@ -22,4 +28,10 @@ export class StepInput {
             description: "The name of the step"
         })
     description!: string
+
+    @Field(() => ID,
+        {
+            description: "The recipe id of the Step"
+        })
+    recipeId!: string
 }

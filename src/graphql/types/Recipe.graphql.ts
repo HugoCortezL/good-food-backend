@@ -1,5 +1,5 @@
+import { RecipeIngredient, Step, Tag } from "./index";
 import { ObjectType, InputType, Field, ID } from "type-graphql";
-import { Step, Tag, RecipeIngredient } from './index'
 @ObjectType()
 export class Recipe {
     @Field(() => ID,
@@ -44,35 +44,23 @@ export class Recipe {
         })
     difficulty!: number
 
-    @Field(() => [Step],
-        {
-            description: "The difficulty of the recipe"
-        })
-    steps!: Step[]
-
     @Field(() => Boolean,
         {
-            description: "The difficulty of the recipe"
+            description: "if the recipe is favorite"
         })
     favorite!: boolean
 
-    @Field(() => Tag,
+    @Field(() => ID,
         {
             description: "The principal tag of the recipe"
         })
-    principalTag!: Tag
+    principalTag!: String
 
-    @Field(() => [Tag],
+    @Field(() => [ID],
         {
             description: "The general tags of the recipe"
         })
-    generalTags!: Tag[]
-    
-    @Field(() => [RecipeIngredient],
-        {
-            description: "The RecipeIngredients of the recipe"
-        })
-    ingredients!: RecipeIngredient[]
+    generalTags!: String[]
 }
 
 @InputType()
@@ -113,33 +101,103 @@ export class RecipeInput {
         })
     difficulty!: number
 
-    @Field(() => [String],
+    @Field(() => Boolean,
+        {
+            description: "The difficulty of the recipe",
+            nullable: true
+        })
+    favorite!: boolean
+
+    @Field(() => ID,
+        {
+            description: "The principal tag of the recipe",
+            nullable: true
+        })
+    principalTag: String
+
+    @Field(() => [ID],
+        {
+            description: "The general tags of the recipe",
+            nullable: true
+        })
+    generalTags: String[]
+}
+
+@ObjectType()
+export class RecipeView {
+    @Field(() => ID,
+        {
+            description: "The id of the recipe"
+        })
+    id!: String
+    
+    @Field(() => String,
+        {
+            description: "The name of the recipe"
+        })
+    name!: string
+
+    @Field(() => Number,
+        {
+            description: "The time in minutes to do the recipe"
+        })
+    time!: number
+
+    @Field(() => Number,
+        {
+            description: "How many people the recipe serving"
+        })
+    servings!: number
+
+    @Field(() => String,
+        {
+            description: "Image url of the recipe"
+        })
+    imageUrl!: string
+
+    @Field(() => Number,
+        {
+            description: "The rate of the recipe"
+        })
+    rate!: number
+
+    @Field(() => Number,
         {
             description: "The difficulty of the recipe"
         })
-    steps!: String[]
+    difficulty!: number
 
     @Field(() => Boolean,
         {
             description: "The difficulty of the recipe"
         })
-    favorite: boolean
+    favorite!: boolean
 
-    @Field(() => String,
+    @Field(() => Tag,
         {
-            description: "The principal tag of the recipe"
+            description: "The principal tag of the recipe",
+            nullable: true
         })
-    principalTag!: String
+    principalTag: Tag
 
-    @Field(() => [String],
+    @Field(() => [Tag],
         {
-            description: "The general tags of the recipe"
+            description: "The general tags of the recipe",
+            nullable: true
         })
-    generalTags!: String[]
+    generalTags: Tag[]
 
-    @Field(() => [String],
+    @Field(() => [RecipeIngredient],
         {
-            description: "The Strings of the recipe"
+            description: "The general tags of the recipe",
+            nullable: true
         })
-    ingredients!: String[]
+    ingredients: RecipeIngredient[]
+
+    @Field(() => [Step],
+        {
+            description: "The general tags of the recipe",
+            nullable: true
+        })
+    steps: Step[]
 }

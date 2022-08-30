@@ -1,14 +1,17 @@
 import { Arg, Mutation, Resolver, Query } from 'type-graphql'
-import { Recipe, RecipeInput } from '../types'
-import { RecipeRepository, RecipeIngredientRepository } from '../../database/repository'
+import { Recipe, RecipeInput, RecipeView } from '../types'
+import { RecipeRepository, RecipeIngredientRepository, StepRepository } from '../../database/repository'
 
 @Resolver(() => Recipe)
 export class RecipeResolver {
     repository: RecipeRepository
     recipeIngredientRepository: RecipeIngredientRepository
+    stepRepository: StepRepository
+
     constructor() {
         this.repository = new RecipeRepository(),
         this.recipeIngredientRepository = new RecipeIngredientRepository()
+        this.stepRepository = new StepRepository()
     }
 
     @Query(() => [Recipe],
@@ -20,7 +23,7 @@ export class RecipeResolver {
         return recipes
     }
 
-    @Query(() => Recipe,
+    @Query(() => RecipeView,
         {
             description: "Get recipe by id"
         })
@@ -30,11 +33,12 @@ export class RecipeResolver {
                 description: "The id of the recipe"
             })
         id: String
-    ): Promise<Recipe> {
-        const recipe:Recipe = await this.repository.getById(id)
-        const ingredients = await this.recipeIngredientRepository.getByIds(recipe.ingredients)
+    ): Promise<RecipeView> {
+        const recipe:RecipeView = await this.repository.getById(id)
+        const ingredients = await this.recipeIngredientRepository.getAllByRecipeId(id)
+        const steps = await this.stepRepository.getAllByRecipeId(id)
         recipe.ingredients = ingredients
-        console.log(ingredients)
+        recipe.steps = steps
         return recipe
     }
 

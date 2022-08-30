@@ -13,6 +13,11 @@ const recipeIngredientSchema = new mongoose.Schema({
     ingredient: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Ingredient"
+    },
+    recipeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Recipe",
+        required: true,
     }
 
 })

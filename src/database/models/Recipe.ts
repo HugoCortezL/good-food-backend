@@ -37,30 +37,18 @@ const recipeSchema = new mongoose.Schema({
         default: false,
         required: true,
     },
-    steps: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Step"
-        }
-    ],
     principalTag: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Tag"
+        ref: "Tag",
+        required: false,
     },
     generalTags: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Tag"
-        }
-    ],
-    ingredients: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "RecipeIngredient"
+            ref: "Tag",
+            required: false,
         }
     ]
-
-
 })
 
 export default mongoose.model<Recipe>('Recipe', recipeSchema)

@@ -26,6 +26,12 @@ export class RecipeIngredient {
             description: "The name of the RecipeIngredient"
         })
     ingredient!: Ingredient
+
+    @Field(() => ID,
+        {
+            description: "The recipe id of the RecipeIngredient"
+        })
+    recipeId!: string
 }
 
 @InputType()
@@ -47,4 +53,10 @@ export class RecipeIngredientInput {
             description: "The name of the RecipeIngredient"
         })
     ingredient!: String
+
+    @Field(() => ID,
+        {
+            description: "The recipe id of the RecipeIngredient"
+        })
+    recipeId!: string
 }

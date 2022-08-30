@@ -3,9 +3,11 @@ import { RecipeIngredient, RecipeIngredientInput } from '../../graphql/types'
 
 export class RecipeIngredientRepository {
 
-    async getByIds(ids: RecipeIngredient[]): Promise<RecipeIngredient[]> {
-        const recipeIngredient = await recipeIngredientModel.find({_id : {$in : ids}}).populate("portion").populate("ingredient")
-        return (recipeIngredient as unknown as RecipeIngredient[])
+    async getAllByRecipeId(recipeId: String): Promise<RecipeIngredient[]> {
+        const recipeIngredients = await recipeIngredientModel.find({recipeId: recipeId})
+            .populate("portion")
+            .populate("ingredient")
+        return (recipeIngredients as unknown as RecipeIngredient[])
     }
 
     async create(item: RecipeIngredientInput): Promise<RecipeIngredient> {
@@ -19,7 +21,8 @@ export class RecipeIngredientRepository {
                 $set: {
                     quantity: item.quantity,
                     portion: item.portion,
-                    ingredient: item.ingredient
+                    ingredient: item.ingredient,
+                    recipeId: item.recipeId
                 }
             })
         return success.acknowledged

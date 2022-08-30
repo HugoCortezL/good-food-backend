@@ -1,22 +1,20 @@
 import recipeModel from '../models/Recipe'
-import { Recipe, RecipeInput } from '../../graphql/types'
+import { Recipe, RecipeInput, RecipeView } from '../../graphql/types'
 
 export class RecipeRepository {
 
     async getAll(): Promise<Recipe[]> {
         const recipes = await recipeModel.find()
-            .populate("steps")
             .populate("principalTag")
             .populate("generalTags")
         return (recipes as unknown as Recipe[])
     }
 
-    async getById(id: String): Promise<Recipe> {
+    async getById(id: String): Promise<RecipeView> {
         const recipe = await recipeModel.findOne({ _id: id })
-            .populate("steps")
             .populate("principalTag")
             .populate("generalTags")
-        return (recipe as unknown as Recipe)
+        return (recipe as unknown as RecipeView)
     }
 
     async create(item: RecipeInput): Promise<Recipe> {
@@ -33,10 +31,8 @@ export class RecipeRepository {
                 imageUrl: item.imageUrl,
                 rate: item.rate,
                 difficulty: item.difficulty,
-                steps: item.steps,
                 principalTag: item.principalTag,
-                generalTags: item.generalTags,
-                ingredients: item.ingredients
+                generalTags: item.generalTags
             }
         })
         return success.acknowledged
