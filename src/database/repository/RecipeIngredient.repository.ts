@@ -10,6 +10,16 @@ export class RecipeIngredientRepository {
         return (recipeIngredients as unknown as RecipeIngredient[])
     }
 
+    async existsByIngredient(ingredientId: String): Promise<RecipeIngredient> {
+        const recipeIngredient = await recipeIngredientModel.findOne({ ingredient: ingredientId })
+        return (recipeIngredient as unknown as RecipeIngredient)
+    }
+    
+    async existsByPortion(portionId: String): Promise<RecipeIngredient> {
+        const recipePortion = await recipeIngredientModel.findOne({ portion: portionId })
+        return (recipePortion as unknown as RecipeIngredient)
+    }
+
     async create(item: RecipeIngredientInput): Promise<RecipeIngredient> {
         const recipeIngredients = await recipeIngredientModel.create(item)
         return (recipeIngredients as unknown as RecipeIngredient)

@@ -1,7 +1,12 @@
 import portionModel from '../models/Portion'
 import { Portion, PortionInput } from '../../graphql/types'
 
+import { RecipeIngredientRepository } from './'
 export class PortionRepository {
+    recipeIngredientRepository: RecipeIngredientRepository
+    constructor() {
+        this.recipeIngredientRepository = new RecipeIngredientRepository()
+    }
 
     async getAll(): Promise<Portion[]> {
         const portions = await portionModel.find()
@@ -19,7 +24,12 @@ export class PortionRepository {
     }
 
     async delete(id: String): Promise<Boolean> {
-        const success = await portionModel.deleteOne({ _id: id })
-        return success.acknowledged
+        const hasRecipeWith = await this.recipeIngredientRepository.existsByPortion(id)
+        if (!hasRecipeWith) {
+            const success = await portionModel.deleteOne({ _id: id })
+            return success.acknowledged
+        }
+        return false
+        
     }
 }

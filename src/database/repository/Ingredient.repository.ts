@@ -1,7 +1,12 @@
 import ingredientModel from '../models/Ingredient'
 import { Ingredient, IngredientInput } from '../../graphql/types'
 
+import { RecipeIngredientRepository } from './'
 export class IngredientRepository {
+    recipeIngredientRepository: RecipeIngredientRepository
+    constructor() {
+        this.recipeIngredientRepository = new RecipeIngredientRepository()
+    }
 
     async getAll(): Promise<Ingredient[]> {
         const ingredients = await ingredientModel.find()
@@ -19,7 +24,11 @@ export class IngredientRepository {
     }
 
     async delete(id: String): Promise<Boolean> {
-        const success = await ingredientModel.deleteOne({ _id: id })
-        return success.acknowledged
+        const hasRecipeWith = await this.recipeIngredientRepository.existsByIngredient(id)
+        if (!hasRecipeWith) {
+            const success = await ingredientModel.deleteOne({ _id: id })
+            return success.acknowledged
+        }
+        return false
     }
 }

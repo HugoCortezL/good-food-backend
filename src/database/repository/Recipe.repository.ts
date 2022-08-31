@@ -10,8 +10,8 @@ export class RecipeRepository {
         return (recipes as unknown as Recipe[])
     }
 
-    async existsByPrincipalTag(principalTag: String): Promise<Recipe> {
-        const recipe = await recipeModel.findOne({ principalTag: principalTag })
+    async existsByPrincipalTag(principalTagId: String): Promise<Recipe> {
+        const recipe = await recipeModel.findOne({ principalTag: principalTagId })
         return (recipe as unknown as Recipe)
     }
 
