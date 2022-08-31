@@ -50,11 +50,11 @@ export class Recipe {
         })
     favorite!: boolean
 
-    @Field(() => ID,
+    @Field(() => Tag,
         {
             description: "The principal tag of the recipe"
         })
-    principalTag!: String
+    principalTag!: Tag
 }
 
 @InputType()
