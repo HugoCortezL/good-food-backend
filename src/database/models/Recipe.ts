@@ -40,7 +40,7 @@ const recipeSchema = new mongoose.Schema({
     principalTag: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Tag",
-        required: false,
+        required: true,
     },
     generalTags: [
         {

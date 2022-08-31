@@ -55,12 +55,6 @@ export class Recipe {
             description: "The principal tag of the recipe"
         })
     principalTag!: String
-
-    @Field(() => [ID],
-        {
-            description: "The general tags of the recipe"
-        })
-    generalTags!: String[]
 }
 
 @InputType()
@@ -110,8 +104,7 @@ export class RecipeInput {
 
     @Field(() => ID,
         {
-            description: "The principal tag of the recipe",
-            nullable: true
+            description: "The principal tag of the recipe"
         })
     principalTag: String
 
@@ -175,8 +168,7 @@ export class RecipeView {
 
     @Field(() => Tag,
         {
-            description: "The principal tag of the recipe",
-            nullable: true
+            description: "The principal tag of the recipe"
         })
     principalTag: Tag
 
