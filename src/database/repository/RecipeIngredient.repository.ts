@@ -42,4 +42,9 @@ export class RecipeIngredientRepository {
         const success = await recipeIngredientModel.deleteOne({ _id: id })
         return success.acknowledged
     }
+
+    async deleteByRecipeId(recipeId: String): Promise<Boolean> {
+        const success = await recipeIngredientModel.deleteMany({ recipeId: recipeId })
+        return success.acknowledged
+    }
 }

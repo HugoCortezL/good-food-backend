@@ -28,4 +28,9 @@ export class StepRepository {
         const success = await stepModel.deleteOne({ _id: id })
         return success.acknowledged
     }
+
+    async deleteByRecipeId(recipeId: String): Promise<Boolean> {
+        const success = await stepModel.deleteMany({ recipeId: recipeId })
+        return success.acknowledged
+    }
 }

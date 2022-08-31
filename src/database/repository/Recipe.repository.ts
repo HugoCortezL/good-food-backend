@@ -1,7 +1,14 @@
 import recipeModel from '../models/Recipe'
 import { Recipe, RecipeInput, RecipeView } from '../../graphql/types'
 
+import {StepRepository, RecipeIngredientRepository} from './'
 export class RecipeRepository {
+    stepRepository: StepRepository
+    recipeIngredientRepository: RecipeIngredientRepository
+    constructor(){
+        this.stepRepository = new StepRepository()
+        this.recipeIngredientRepository = new RecipeIngredientRepository()
+    }
 
     async getAll(): Promise<Recipe[]> {
         const recipes = await recipeModel.find()
@@ -54,7 +61,9 @@ export class RecipeRepository {
     }
 
     async delete(id: String): Promise<Boolean> {
+        const stepsResult = await this.stepRepository.deleteByRecipeId(id)
+        const ingredientsResult = await this.recipeIngredientRepository.deleteByRecipeId(id)
         const success = await recipeModel.deleteOne({ _id: id })
-        return success.acknowledged
+        return success.acknowledged && stepsResult && ingredientsResult
     }
 }
