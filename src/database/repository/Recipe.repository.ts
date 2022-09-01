@@ -1,11 +1,11 @@
 import recipeModel from '../models/Recipe'
 import { Recipe, RecipeInput, RecipeView } from '../../graphql/types'
 
-import {StepRepository, RecipeIngredientRepository} from './'
+import { StepRepository, RecipeIngredientRepository } from './'
 export class RecipeRepository {
     stepRepository: StepRepository
     recipeIngredientRepository: RecipeIngredientRepository
-    constructor(){
+    constructor() {
         this.stepRepository = new StepRepository()
         this.recipeIngredientRepository = new RecipeIngredientRepository()
     }
@@ -66,4 +66,20 @@ export class RecipeRepository {
         const success = await recipeModel.deleteOne({ _id: id })
         return success.acknowledged && stepsResult && ingredientsResult
     }
+
+    async addGeneralTagToRecipe(recipeId: String, tagId: string): Promise<Boolean> {
+        const recipe = await recipeModel.findOne({_id: recipeId})
+        if(recipe){
+            const generalTags = [...(recipe as unknown as RecipeView).generalTags, tagId]
+            const success = await recipeModel.updateOne({ _id: recipeId }, {
+                $set: {
+                    generalTags: generalTags
+                }
+            })
+            return success.acknowledged            
+        }
+        return false
+
+    }
+
 }

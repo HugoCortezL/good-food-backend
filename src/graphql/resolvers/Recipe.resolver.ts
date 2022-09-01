@@ -10,7 +10,7 @@ export class RecipeResolver {
 
     constructor() {
         this.repository = new RecipeRepository(),
-        this.recipeIngredientRepository = new RecipeIngredientRepository()
+            this.recipeIngredientRepository = new RecipeIngredientRepository()
         this.stepRepository = new StepRepository()
     }
 
@@ -34,7 +34,7 @@ export class RecipeResolver {
             })
         id: String
     ): Promise<RecipeView> {
-        const recipe:RecipeView = await this.repository.getById(id)
+        const recipe: RecipeView = await this.repository.getById(id)
         const ingredients = await this.recipeIngredientRepository.getAllByRecipeId(id)
         const steps = await this.stepRepository.getAllByRecipeId(id)
         recipe.ingredients = ingredients
@@ -77,7 +77,28 @@ export class RecipeResolver {
         const success = await this.repository.update(id, recipeInput)
         return success
     }
-    
+
+    @Mutation(() => Boolean,
+        {
+            description: "Add general tag to recipe"
+        })
+    async addGeneralTag(
+        @Arg("recipeId",
+            {
+                description: "The id of the recipe"
+            })
+        recipeId: String,
+
+        @Arg("tagId",
+            {
+                description: "The tag id to add in general tags of the recipe"
+            })
+        tagId: string
+    ): Promise<Boolean> {
+        const success = await this.repository.addGeneralTagToRecipe(recipeId, tagId)
+        return success
+    }
+
     @Mutation(() => Boolean,
         {
             description: "Favorite a recipe"
